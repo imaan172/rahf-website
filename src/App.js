@@ -1,17 +1,14 @@
 import React from "react";
-import { Button, Container, Typography } from "@mui/material";
+import PictureBackground from "./components/pictureBackground";
+import Header from "./components/header";
 
-function App() {
+const App = () => {
   return (
-    <Container>
-      <Typography variant="h2" gutterBottom>
-        Welcome to Rahf Website!
-      </Typography>
-      <Button variant="contained" color="primary">
-        Click Me
-      </Button>
-    </Container>
+    <div>
+      <Header />
+      <PictureBackground />
+    </div>
   );
-}
+};
 
 export default App;
