@@ -10,6 +10,7 @@
    - fixed the appbar to be responsive on mobile
    - fixed errors in console
 7. Added footer
+8. Filled out the about page
 
 # Concerns
 

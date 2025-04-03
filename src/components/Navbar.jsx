@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useRoutes, useLocation } from 'react-router';
 // material-ui
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -32,6 +32,7 @@ const Navbar = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [currentOpenMenu, setCurrentOpenMenu] = useState(null);
   const open = Boolean(anchorEl);
+  const location = useLocation();
 
   const handleNavButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,7 +51,11 @@ const Navbar = (props) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" position="absolute" sx={{ background: 'transparent', boxShadow: 'none', padding: '10px' }}>
+      <AppBar
+        component="nav"
+        position={location.pathname === '/' ? 'absolute' : 'static'}
+        sx={{ background: 'transparent', boxShadow: 'none', padding: '10px' }}
+      >
         <Toolbar>
           {/* LOGO */}
           <Box sx={{ flexGrow: 1 }}>
@@ -61,18 +66,25 @@ const Navbar = (props) => {
 
           {/* MOBILE BUTTONS */}
           <Stack direction="row">
-            <IconButton color="inherit">
+            <IconButton sx={{ color: location.pathname === '/' ? '#fff' : '#000' }}>
               <InfoIcon />
             </IconButton>
 
-            <IconButton sx={{ display: { xs: 'block', sm: 'none' }, margin: 'none', color: '#ffffff' }} onClick={handleDrawerToggle}>
+            <IconButton
+              sx={{ display: { xs: 'block', sm: 'none' }, margin: 'none', color: location.pathname === '/' ? '#fff' : '#000' }}
+              onClick={handleDrawerToggle}
+            >
               <MenuIcon color="inherit" />
             </IconButton>
           </Stack>
 
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {Object.keys(navigationItems).map((item) => (
-              <Button onClick={handleNavButtonClick} key={item} sx={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
+              <Button
+                onClick={handleNavButtonClick}
+                key={item}
+                sx={{ color: location.pathname === '/' ? '#fff' : '#000', fontSize: 18, fontWeight: 'bold' }}
+              >
                 {item}
               </Button>
             ))}
