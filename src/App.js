@@ -1,13 +1,18 @@
-import React from "react";
-import PictureBackground from "./components/pictureBackground";
-import Header from "./components/header";
+import React from 'react';
+import { Route, Routes } from 'react-router';
+
+//pages
+import HomePage from './pages/HomePage';
+import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <PictureBackground />
-    </div>
+    <Routes>
+      <Route index element={<HomePage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/about" element={<AboutPage />} />
+    </Routes>
   );
 };
 
