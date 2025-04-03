@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
+import InfoPage from './pages/InfoPage';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Route index element={<HomePage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/info" element={<InfoPage />} />
     </Routes>
   );
 };

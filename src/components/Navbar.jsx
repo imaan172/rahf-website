@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useRoutes, useLocation } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 // material-ui
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -59,16 +59,18 @@ const Navbar = (props) => {
         <Toolbar>
           {/* LOGO */}
           <Box sx={{ flexGrow: 1 }}>
-            <Link to="/">
+            <NavLink to="/">
               <Box component="img" src="/images/RAHF.svg" alt="logo" sx={{ width: { xs: 100, sm: 120 } }} />
-            </Link>
+            </NavLink>
           </Box>
 
           {/* MOBILE BUTTONS */}
           <Stack direction="row">
-            <IconButton sx={{ color: location.pathname === '/' ? '#fff' : '#000' }}>
-              <InfoIcon />
-            </IconButton>
+            <NavLink to="/info">
+              <IconButton sx={{ color: location.pathname === '/' ? '#fff' : '#000' }}>
+                <InfoIcon />
+              </IconButton>
+            </NavLink>
 
             <IconButton
               sx={{ display: { xs: 'block', sm: 'none' }, margin: 'none', color: location.pathname === '/' ? '#fff' : '#000' }}
