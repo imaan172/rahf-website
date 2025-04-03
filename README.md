@@ -9,6 +9,7 @@
 6. Fixed the homepage
    - fixed the appbar to be responsive on mobile
    - fixed errors in console
+7. Added footer
 
 # Concerns
 
