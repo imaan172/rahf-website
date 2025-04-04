@@ -66,7 +66,7 @@ const Navbar = (props) => {
     <Box sx={{ display: 'flex' }}>
       <AppBar
         component="nav"
-        position={location.pathname === '/' ? 'absolute' : 'static'}
+        position="fixed"
         sx={{ background: 'transparent', boxShadow: 'none', padding: '10px' }}
       >
         <Toolbar>
