@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useRoutes, useLocation } from 'react-router';
+import { Link, useRoutes, useLocation, useEffect} from 'react-router';
+
 // material-ui
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,10 +22,22 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const drawerWidth = 240;
 const navigationItems = {
-  'Ready to Wear': ['Watermelon Seeds', 'Timeless Denim'],
-  Accessories: ['Belts', 'Bags'],
-  'Garment History': ['Ready to Wear', 'Custom Garments', 'Couture', 'Bridal'],
+  'Ready to Wear': [
+    { name: 'Watermelon Seeds', path: '/ready-to-wear#watermelonSeeds' },
+    { name: 'Timeless Denim', path: '/ready-to-wear#timelessDenim' },
+    { name: 'Jou Ma Se', path: '/ready-to-wear#jouMaSe' }
+  ],
+  'Accessories': [
+    { name: 'RAHF Belts', path: '/accessories#Belts' },
+    { name: 'RAHF Bags', path: '/accessories#Bags' }
+  ],
+  'Garment Archives': [
+    { name: 'Custom Garments', path: '/garment-archives#custom-garments' },
+    { name: 'Couture', path: '/garment-archives#couture' },
+    { name: 'Bridal', path: '/garment-archives#bridal' }
+  ],
 };
+
 
 const Navbar = (props) => {
   const { window } = props;
@@ -95,10 +108,14 @@ const Navbar = (props) => {
         <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
           {currentOpenMenu
             ? navigationItems[currentOpenMenu].map((item) => {
-                return (
-                  <MenuItem key={item} onClick={handleMenuClose}>
-                    {item}
-                  </MenuItem>
+              return (
+              <ListItem key={item.name}>
+              <ListItemText>
+                <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {item.name}
+                </Link>
+              </ListItemText>
+            </ListItem>
                 );
               })
             : null}
@@ -112,7 +129,7 @@ const Navbar = (props) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -125,29 +142,33 @@ const Navbar = (props) => {
           </Box>
 
           {/* MENU ITEMS */}
-          {Object.keys(navigationItems).map((item) => {
-            return (
-              <List key={item} sx={{ pb: 0 }}>
-                <ListItem>
-                  <ListItemText primary={item} />
+{Object.keys(navigationItems).map((item) => {
+  return (
+    <List key={item} sx={{ pb: 0 }}>
+      <ListItem>
+        <ListItemText primary={item} />
 
-                  <ListItemIcon>
-                    <ExpandMore />
-                  </ListItemIcon>
-                </ListItem>
+        <ListItemIcon>
+          <ExpandMore />
+        </ListItemIcon>
+      </ListItem>
 
-                <List sx={{ ml: 5 }} disablePadding>
-                  {navigationItems[item].map((subItem) => {
-                    return (
-                      <ListItem key={subItem}>
-                        <ListItemText primary={subItem} />
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </List>
-            );
-          })}
+      <List sx={{ ml: 5 }} disablePadding>
+        {navigationItems[item].map((subItem) => {
+          return (
+            <ListItem key={subItem.name}>
+              <ListItemText>
+                <Link to={subItem.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {subItem.name}
+                </Link>
+              </ListItemText>
+            </ListItem>
+          );
+        })}
+      </List>
+    </List>
+  );
+})}
         </Drawer>
       </nav>
     </Box>

@@ -6,8 +6,8 @@ const PictureBackground = () => {
       <Box 
       sx={{
         height: '100vh',
-        backgroundImage: 'url(/images/header-picture-copy.jpeg)',
-        backgroundSize: 'cover', 
+        backgroundImage: 'url(/images/background-image.jpeg)',
+        backgroundSize: 'cover',
         backgroundPosition: 'center', 
         display: 'flex',
         justifyContent: 'center',
