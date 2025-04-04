@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useRoutes, useLocation, useEffect} from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router';
 
-// material-ui
+// Material-UI
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,7 +16,8 @@ import Menu from '@mui/material/Menu';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
-// icons
+
+// Icons
 import InfoIcon from '@mui/icons-material/Info';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
@@ -38,7 +39,6 @@ const navigationItems = {
   ],
 };
 
-
 const Navbar = (props) => {
   const { window } = props;
   const [anchorEl, setAnchorEl] = useState(null);
@@ -51,6 +51,7 @@ const Navbar = (props) => {
     setAnchorEl(event.currentTarget);
     setCurrentOpenMenu(event.target.textContent);
   };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     setCurrentOpenMenu(null);
@@ -72,16 +73,18 @@ const Navbar = (props) => {
         <Toolbar>
           {/* LOGO */}
           <Box sx={{ flexGrow: 1 }}>
-            <Link to="/">
+            <NavLink to="/">
               <Box component="img" src="/images/RAHF.svg" alt="logo" sx={{ width: { xs: 100, sm: 120 } }} />
-            </Link>
+            </NavLink>
           </Box>
 
           {/* MOBILE BUTTONS */}
           <Stack direction="row">
-            <IconButton sx={{ color: location.pathname === '/' ? '#fff' : '#000' }}>
-              <InfoIcon />
-            </IconButton>
+            <NavLink to="/info">
+              <IconButton sx={{ color: location.pathname === '/' ? '#fff' : '#000' }}>
+                <InfoIcon />
+              </IconButton>
+            </NavLink>
 
             <IconButton
               sx={{ display: { xs: 'block', sm: 'none' }, margin: 'none', color: location.pathname === '/' ? '#fff' : '#000' }}
@@ -102,22 +105,19 @@ const Navbar = (props) => {
               </Button>
             ))}
           </Box>
-          {/* MENU ITEMS */}
         </Toolbar>
 
         <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
           {currentOpenMenu
-            ? navigationItems[currentOpenMenu].map((item) => {
-              return (
-              <ListItem key={item.name}>
-              <ListItemText>
-                <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  {item.name}
-                </Link>
-              </ListItemText>
-            </ListItem>
-                );
-              })
+            ? navigationItems[currentOpenMenu].map((item) => (
+                <ListItem key={item.name}>
+                  <ListItemText>
+                    <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {item.name}
+                    </Link>
+                  </ListItemText>
+                </ListItem>
+              ))
             : null}
         </Menu>
       </AppBar>
@@ -142,33 +142,28 @@ const Navbar = (props) => {
           </Box>
 
           {/* MENU ITEMS */}
-{Object.keys(navigationItems).map((item) => {
-  return (
-    <List key={item} sx={{ pb: 0 }}>
-      <ListItem>
-        <ListItemText primary={item} />
+          {Object.keys(navigationItems).map((item) => (
+            <List key={item} sx={{ pb: 0 }}>
+              <ListItem>
+                <ListItemText primary={item} />
+                <ListItemIcon>
+                  <ExpandMore />
+                </ListItemIcon>
+              </ListItem>
 
-        <ListItemIcon>
-          <ExpandMore />
-        </ListItemIcon>
-      </ListItem>
-
-      <List sx={{ ml: 5 }} disablePadding>
-        {navigationItems[item].map((subItem) => {
-          return (
-            <ListItem key={subItem.name}>
-              <ListItemText>
-                <Link to={subItem.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  {subItem.name}
-                </Link>
-              </ListItemText>
-            </ListItem>
-          );
-        })}
-      </List>
-    </List>
-  );
-})}
+              <List sx={{ ml: 5 }} disablePadding>
+                {navigationItems[item].map((subItem) => (
+                  <ListItem key={subItem.name}>
+                    <ListItemText>
+                      <Link to={subItem.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {subItem.name}
+                      </Link>
+                    </ListItemText>
+                  </ListItem>
+                ))}
+              </List>
+            </List>
+          ))}
         </Drawer>
       </nav>
     </Box>
